@@ -1,0 +1,30 @@
+# Build outputs
+*.o
+*.out
+*.bin
+
+# ASM Files
+*.s
+*.asm
+
+# Debug Files
+*.log
+*.dSYM/
+*.tmp
+
+# Backup Files
+*~
+*.swp
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# MacOS system files
+.DS_Store
+
+# SSH 
+id_rsa
+id_rsa.pub
