@@ -15,6 +15,14 @@ int create_server(int port){
 		perror("Socket Initialization Failed"); // Error message for debugging
 		exit(EXIT_FAILURE);
 	}
+
+	// Restart server when program is closed (socket options)
+	int opt = 1;
+	if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
+		perror("Socket option configuraiton failed");
+		exit(EXIT_FAILURE);
+	}
+
 	struct sockaddr_in addr;
 	addr.sin_port = htons(port); // Assign port and use htons() to convert endianess
 	addr.sin_family = AF_INET; // IPv4 address family
