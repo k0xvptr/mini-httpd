@@ -8,17 +8,17 @@
 #include <netinet/in.h>
 
 int create_server(int port){
-	int fd = socket(AF_INET, SOCK_STREAM, 0);  // Initializing the socket() 
+	int sockfd = socket(AF_INET, SOCK_STREAM, 0);  // Initializing the socket() 
 	
 	// Checking return value of fd
-	if (fd < 0) {
+	if (sockfd < 0) {
 		perror("Socket Initialization Failed"); // Error message for debugging
 		exit(EXIT_FAILURE);
 	}
 
 	// Restart server when program is closed (socket options)
 	int opt = 1;
-	if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
+	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
 		perror("Socket option configuraiton failed");
 		exit(EXIT_FAILURE);
 	}
@@ -31,15 +31,18 @@ int create_server(int port){
 	memset(&addr, 0, sizeof(addr)); // initialize everything to zero inside the struct
 
 	// Checking return value of bind()
-	if (bind(fd, (struct sockaddr* )&addr, sizeof(addr)) < 0 ) {
+	if (bind(sockfd, (struct sockaddr* )&addr, sizeof(addr)) < 0 ) {
 		perror("Binding Failed");
 		exit(EXIT_FAILURE);
 	}
 
 	// Checking return value for listen()
-	if (listen(fd, 10) < 0) {
+	if (listen(sockfd, 10) < 0) {
 		perror("Listen initialization failed");
 		exit(EXIT_FAILURE);
 	}
-	return fd;
+	return sockfd;
 }
+
+
+
