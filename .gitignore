@@ -1,6 +1,5 @@
 # Folders to Ignore
 build/
-include/
 asm/
 notes/
 

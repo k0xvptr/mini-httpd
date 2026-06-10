@@ -1,11 +1,4 @@
-#include <sys/socket.h>
 #include "../include/server.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
-#include <netinet/in.h>
 
 int create_server(int port){
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);  // Initializing the socket() 

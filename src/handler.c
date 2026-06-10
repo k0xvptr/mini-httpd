@@ -6,11 +6,11 @@
 
 typedef http_states (*state_fn)(http_header* header, char byte);
 
-void handle_client(int sockfd, struct sockaddr_in *caddr) {
+void handle_client(int sockfd, struct sockaddr_in *caddr, TrieNode* root) {
   char buff[1024];
   const char delimiter[4] = "\r\n\r\n";
-  state_fn s_functions[3] = {
-    method, url, version
+  state_fn s_functions[4] = {
+    method, url, version, header
   };
   http_header *content = malloc(sizeof(http_header));
   content->header_buff = (char *)malloc(100000 * sizeof(char));
@@ -31,6 +31,6 @@ void handle_client(int sockfd, struct sockaddr_in *caddr) {
 }
 
 int main() {
-  handle_client(0, NULL);
+  handle_client(0, NULL, NULL);
   return 0;
 }
